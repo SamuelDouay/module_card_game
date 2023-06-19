@@ -1,7 +1,9 @@
-package dutch.util;
+package game.dutch.util;
 
-import dutch.enums.CardColor;
-import dutch.enums.CardValue;
+import game.dutch.enums.CardColor;
+import game.dutch.enums.CardValue;
+
+import java.util.Objects;
 
 public class Card {
     private CardValue value;
@@ -36,8 +38,24 @@ public class Card {
         this.isWatching = isWatching;
     }
 
+    public String lookCard() {
+        this.setWatching(true);
+        return this.getValue() + " de " + this.getColor();
+    }
     @Override
     public String toString() {
         return "X";
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Card card)) return false;
+        return card.value.equals(value);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(value);
     }
 }

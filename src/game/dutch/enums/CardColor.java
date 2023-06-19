@@ -1,4 +1,4 @@
-package dutch.enums;
+package game.dutch.enums;
 
 public enum CardColor {
     HEART("COEUR"), DIAMOND("CARREAU"), CLUB("TREFLE"), SPADE("PIQUE");

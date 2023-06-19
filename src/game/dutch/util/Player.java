@@ -1,6 +1,7 @@
-package dutch.util;
+package game.dutch.util;
 
 import java.util.List;
+import java.util.Stack;
 
 public class Player {
     private int id;
@@ -12,15 +13,14 @@ public class Player {
         this.id = id;
         this.hand = hand;
         this.dutch = false;
+        this.point = 0;
         this.calculatePoint();
     }
 
     private void calculatePoint() {
-        int res = 0;
         for (Card c: this.hand ) {
-            res += c.getPoint();
+            this.point += c.getPoint();
         }
-        this.point = res;
     }
 
     public int getId() {
@@ -28,8 +28,7 @@ public class Player {
     }
 
     public String lookCard(int id) {
-        this.hand.get(id-1).setWatching(true);
-        return this.hand.get(id-1).getValue() + " de " + this.hand.get(id-1).getColor();
+        return this.hand.get(id-1).lookCard();
     }
 
     public void addCard(Card card) {
@@ -45,15 +44,30 @@ public class Player {
         return dutch;
     }
 
-    public Card pick() {
-        return null;
+    public void shoutDutch() {
+        this.dutch = true;
     }
 
-    public void discard(Card card) {
+    public Card pick(Stack<Card> pickaxe) {
+        Card res = pickaxe.pop();
+        res.setWatching(true);
+        return res;
+    }
+
+    public Card discard(int indexCard) {
+       return this.hand.remove(indexCard - 1);
+    }
+
+    public void recoveryCard(int indexCard, Card recoveryCard) {
+        this.hand.add(indexCard - 1, recoveryCard);
+    }
+
+    public Card exchangeCard(Card cardPickaxe, int indexCard) {
+        return this.hand.set(indexCard - 1, cardPickaxe);
     }
 
     @Override
     public String toString() {
-        return "Player : " + this.id + " - Hand : " + this.hand;
+        return "Player " + this.id + " - Hand : " + this.hand;
     }
 }

@@ -1,8 +1,8 @@
-package dutch;
+package game.dutch;
 
-import dutch.enums.CardColor;
-import dutch.enums.CardValue;
-import dutch.util.Card;
+import game.dutch.enums.CardColor;
+import game.dutch.enums.CardValue;
+import game.dutch.util.Card;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -45,4 +45,11 @@ public class Dutch {
         return cards;
     }
 
+    public Stack<Card> getPickaxe() {
+        return pickaxe;
+    }
+
+    public Stack<Card> getDiscard() {
+        return discard;
+    }
 }
