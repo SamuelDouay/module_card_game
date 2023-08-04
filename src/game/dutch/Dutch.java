@@ -13,7 +13,6 @@ public class Dutch {
     private final Stack<Card> pickaxe;
     private final Stack<Card> discard;
     private static final int CARD_INIT = 4;
-
     public Dutch() {
         this.pickaxe = new Stack<>();
         this.discard = new Stack<>();
