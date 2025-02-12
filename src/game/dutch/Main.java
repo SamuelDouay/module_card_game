@@ -7,11 +7,9 @@ import game.dutch.util.Player;
 import java.util.Scanner;
 
 public class Main {
-
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Welcome au  game.dutch");
-
         Dutch dutch = new Dutch();
         dutch.initGame();
 
@@ -31,7 +29,7 @@ public class Main {
                 System.out.println("Dernière carte de la défausse : " + dutch.getDiscard().peek().lookCard());
             }
 
-            Card cardPickaxe = getCardPickaxe(dutch, p1);
+            Card cardPickaxe = getCardPickaxe(dutch, p1, scanner);
 
             exchangeCard(scanner, dutch, p1, cardPickaxe);
             throwCard(scanner, dutch, p1, "As tu une autre carte que tu souhaites jetter ? o/n");
@@ -49,11 +47,30 @@ public class Main {
 
     }
 
-    private static Card getCardPickaxe(Dutch dutch, Player p1) {
-        System.out.println("Pioches une carte");
-        Card cardPickaxe = p1.pick(dutch.getPickaxe());
-        System.out.println("Tu as piocher cette carte :" + cardPickaxe.lookCard());
-        return cardPickaxe;
+    private static Card getCardPickaxe(Dutch dutch, Player p1, Scanner scanner) {
+
+        if (dutch.getDiscard().isEmpty()) {
+            Card pickedCard = p1.pick(dutch.getPickaxe());
+            System.out.println("Premier tour - Tu pioches une nouvelle carte : " + pickedCard.lookCard());
+            return pickedCard;
+        }
+
+        System.out.println("Veux-tu piocher dans la pioche (p) ou dans la défausse (d) ?");
+        String choice = scanner.next();
+        
+        Card pickedCard;
+        if (choice.equals("d") && !dutch.getDiscard().isEmpty()) {
+            pickedCard = dutch.getDiscard().pop();
+            System.out.println("Tu as pris cette carte de la défausse : " + pickedCard.lookCard());
+        } else {
+            if (choice.equals("d")) {
+                System.out.println("La défausse est vide, tu dois piocher une nouvelle carte.");
+            }
+            pickedCard = p1.pick(dutch.getPickaxe());
+            System.out.println("Tu as pioché cette carte : " + pickedCard.lookCard());
+        }
+        
+        return pickedCard;
     }
 
     private static void exchangeCard(Scanner scanner, Dutch dutch, Player p, Card cardPickaxe) {

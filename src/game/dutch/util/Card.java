@@ -58,4 +58,9 @@ public class Card {
     public int hashCode() {
         return Objects.hash(value);
     }
+
+    public void ifPresent(Object object) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'ifPresent'");
+    }
 }
