@@ -38,13 +38,20 @@ public class Card {
         this.isWatching = isWatching;
     }
 
-    public String lookCard() {
-        this.setWatching(true);
-        return this.getValue() + " de " + this.getColor();
-    }
     @Override
     public String toString() {
-        return "X";
+        return """
+               ┌─────────┐
+               │░░░░░░░░░│
+               │░░░░░░░░░│
+               │░░░░░░░░░│
+               │░░░░░░░░░│
+               └─────────┘""";
+    }
+
+    public String lookCard() {
+        this.setWatching(true);
+        return String.format("Carte %s de %s (%d points)", this.getValue(), this.getColor(), this.point);
     }
 
     @Override

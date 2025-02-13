@@ -68,6 +68,32 @@ public class Player {
 
     @Override
     public String toString() {
-        return "Player " + this.id + " - Hand : " + this.hand;
+        StringBuilder display = new StringBuilder();
+        
+        // Ligne du haut des cartes
+        display.append("Main du Joueur ").append(this.id).append(" (").append(this.point).append(" points)\n\n");
+        
+        // Numéros des cartes
+        for (int i = 1; i <= hand.size(); i++) {
+            display.append(String.format("   [%d]    ", i));
+        }
+        display.append("\n");
+        
+        // Affichage des cartes ligne par ligne
+        String[] cardLines = new String[6];
+        for (Card card : hand) {
+            String[] lines = card.toString().split("\n");
+            for (int i = 0; i < lines.length; i++) {
+                if (cardLines[i] == null) cardLines[i] = "";
+                cardLines[i] += lines[i] + " ";
+            }
+        }
+        
+        // Assemblage des lignes
+        for (String line : cardLines) {
+            display.append(line).append("\n");
+        }
+        
+        return display.toString();
     }
 }
