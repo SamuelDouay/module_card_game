@@ -48,28 +48,8 @@ public class Main {
     }
 
     private static Card getCardPickaxe(Dutch dutch, Player p1, Scanner scanner) {
-
-        if (dutch.getDiscard().isEmpty()) {
-            Card pickedCard = p1.pick(dutch.getPickaxe());
-            System.out.println("Premier tour - Tu pioches une nouvelle carte : " + pickedCard.lookCard());
-            return pickedCard;
-        }
-
-        System.out.println("Veux-tu piocher dans la pioche (p) ou dans la défausse (d) ?");
-        String choice = scanner.next();
-        
-        Card pickedCard;
-        if (choice.equals("d") && !dutch.getDiscard().isEmpty()) {
-            pickedCard = dutch.getDiscard().pop();
-            System.out.println("Tu as pris cette carte de la défausse : " + pickedCard.lookCard());
-        } else {
-            if (choice.equals("d")) {
-                System.out.println("La défausse est vide, tu dois piocher une nouvelle carte.");
-            }
-            pickedCard = p1.pick(dutch.getPickaxe());
-            System.out.println("Tu as pioché cette carte : " + pickedCard.lookCard());
-        }
-        
+        Card pickedCard = p1.pick(dutch.getPickaxe());
+        System.out.println("Premier tour - Tu pioches une nouvelle carte : " + pickedCard.lookCard());
         return pickedCard;
     }
 
