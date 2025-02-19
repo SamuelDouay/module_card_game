@@ -150,7 +150,7 @@ public class Main {
     }
     
     private static void handleOptionalCardThrow(Dutch dutch, Player player) {
-        System.out.println("Souhaites tu veux jetter une autre carte ? o/n");
+        System.out.println("Souhaites tu veux jeter une autre carte de ta main ? o/n");
         if (scanner.next().equals(YES)) {
             executeCardThrow(dutch, player);
         }
